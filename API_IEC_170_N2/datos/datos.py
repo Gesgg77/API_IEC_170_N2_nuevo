@@ -3,13 +3,13 @@ import sqlite3
 import os
 
 def conectar():
-    # Conecta y asegura que la estructura exista
+    # Conecta 
     con = sqlite3.connect('api_iec_170.db')
     crear_tabla(con)
     return con
 
 def crear_tabla(con):
-    # Crea la tabla users con las 6 columnas correctas si no existe
+    # Crea la tabla 
     sql = '''
     CREATE TABLE IF NOT EXISTS users (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -25,7 +25,7 @@ def crear_tabla(con):
 def insertar_objeto(user):
     con = conectar()
     cur = con.cursor()
-    # Inserta los 6 valores: NULL (para autoincrement) + 5 datos del objeto
+    # Inserta 
     cur.execute(
         'INSERT INTO users VALUES (NULL,?,?,?,?,?)',
         (user.name, user.username, user.email, user.phone, user.website)
@@ -39,4 +39,5 @@ def obtener_user_name(nombre):
     cur.execute('SELECT * FROM users WHERE name=?', (nombre,))
     r = cur.fetchone()
     con.close()
+
     return r
